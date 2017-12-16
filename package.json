@@ -1,0 +1,21 @@
+{
+  "name": "concat-preter",
+  "version": "0.0.1",
+  "repo": "catb0t/concat-preter",
+  "description": "concatenative language implementation",
+  "keywords": [
+    "vm",
+    "language"
+  ],
+  "dependencies": {
+    "catb0t/fnv-hash": "*",
+    "catb0t/yacbnl": "*",
+    "willemt/file2str": "*"
+  },
+  "license": "GPL v3",
+  "src": [
+    "Makefile",
+    "README.md",
+    "LICENSE"
+  ]
+}
