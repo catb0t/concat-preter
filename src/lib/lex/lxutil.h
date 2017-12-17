@@ -1,4 +1,4 @@
-#include "lexcommon.h"
+#include "lexcommon.c"
 
 astnode_t* lex_string (const char* const prog) {
   pfn();
@@ -39,8 +39,8 @@ astnode_t* lex_string (const char* const prog) {
       }
 
       case DIGIT: {
-        // break;
         tmp = build_number(prog, i, &thisnode);
+        break;
       }
 
       case EASCII: {

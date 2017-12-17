@@ -2,7 +2,7 @@
 #line 2 "ops"
 #endif
 
-#include "stackcommon.h"
+#include "stackcommon.c"
 //
 ///*
 //  OPERATORS

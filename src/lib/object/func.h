@@ -1,4 +1,4 @@
-#include "objectcommon.h"
+#include "objectcommon.c"
 
 #ifndef OBJECT_FUNC_H
 #define OBJECT_FUNC_H

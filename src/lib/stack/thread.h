@@ -2,5 +2,5 @@
 #line 2 "thread"
 #endif
 
-#include "stackcommon.h"
+#include "stackcommon.c"
 

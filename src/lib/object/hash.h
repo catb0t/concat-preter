@@ -1,4 +1,4 @@
-#include "objectcommon.h"
+#include "objectcommon.c"
 
 #ifndef OBJECT_HASH_H
 #define OBJECT_HASH_H
@@ -7,7 +7,7 @@
 #line __LINE__ "hash"
 #endif
 
-#include "../../deps/fnv-hash/fnv.h"
+#include "../../../deps/fnv-hash/fnv.h"
 
 typedef Fnv32_t hashkey_t;
 

@@ -1,4 +1,4 @@
-#include "objectcommon.h"
+#include "objectcommon.c"
 
 #ifndef OBJECT_STRING_H
 #define OBJECT_STRING_H

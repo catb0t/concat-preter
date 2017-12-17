@@ -2,7 +2,7 @@
 #line 2 "primitve"
 #endif
 
-#include "stackcommon.h"
+#include "stackcommon.c"
 
 /*
   stack_new: returns a new stack_t* object, heap allocated

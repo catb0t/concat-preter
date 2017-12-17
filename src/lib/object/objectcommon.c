@@ -1,5 +1,5 @@
 #include <stdarg.h>
-#include "../common.h"
+#include "../../common.h"
 
 #ifndef OBJECT_COMMON_H
 #define OBJECT_COMMON_H

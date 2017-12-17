@@ -1,4 +1,4 @@
-#include "objectcommon.h"
+#include "objectcommon.c"
 
 #ifndef OBJECT_ARRAY_H
 #define OBJECT_ARRAY_H

@@ -1,7 +1,7 @@
 #include <criterion/criterion.h>
 
 #undef DEBUG
-#include "./calc.h"
+#include "../concat-preter.h"
 
 Test(stack, base10) {
   cr_assert_eq( is_base10("+0123.4567890"), true, "numeric string is base 10");
