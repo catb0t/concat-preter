@@ -1,4 +1,4 @@
-#include "objectcommon.c"
+#include "objectcommon.h"
 
 #ifndef OBJECT_HASH_H
 #define OBJECT_HASH_H

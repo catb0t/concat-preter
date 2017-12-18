@@ -3,7 +3,7 @@
 #endif
 
 #include <sys/stat.h>
-#include "lib/stack/stack.h"
+#include "lib/stack/stackcommon.h"
 
 char**     file_lines (const char* const fname, size_t* len);
 

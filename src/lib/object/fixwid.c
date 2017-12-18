@@ -1,4 +1,4 @@
-#include "objectcommon.c"
+#include "objectcommon.h"
 
 #ifndef OBJECT_FIXWID_H
 #define OBJECT_FIXWID_H

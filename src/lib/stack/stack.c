@@ -1,5 +1,4 @@
-#include "ops.h"
-#include "primitive.h"
+#include "stackcommon.h"
 
 #ifdef GCC
 #line __LINE__ "stack"

@@ -12,15 +12,7 @@
 
 #else // !STACK
 */
-#include "array.h"
-#include "assoc.h"
-#include "fixwid.h"
-#include "func.h"
-#include "hash.h"
-#include "number.h"
-#include "pair.h"
-#include "string.h"
-#include "seq.h"
+#include "objectcommon.h"
 
 #ifdef GCC
 #line __LINE__ "object"

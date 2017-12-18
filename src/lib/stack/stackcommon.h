@@ -4,7 +4,7 @@
 
 #ifndef STACK
 #define STACK
-#include "../object/object.h"
+#include "../object/objectcommon.h"
 
 // maybe it will grow in the future
 #define INITIAL_STACKSIZE 50

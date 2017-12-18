@@ -1,7 +1,7 @@
-#include "../common.h"
-#include "../object/object.h"
-#include "../lex/lex.h"
-#include "../stack/stack.h"
+#include "../../common.h"
+#include "../object/objectcommon.h"
+#include "../lex/lexcommon.h"
+#include "../stack/stackcommon.h"
 
 #ifdef HAVE_POSIX
 

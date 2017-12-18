@@ -1,8 +1,10 @@
+#ifndef STACK_OPS_H
+#define STACK_OPS_H
 #ifdef GCC
 #line 2 "ops"
 #endif
 
-#include "stackcommon.c"
+#include "stackcommon.h"
 //
 ///*
 //  OPERATORS
@@ -154,3 +156,4 @@
 //
 ///* END OPERATORS */
 //
+#endif

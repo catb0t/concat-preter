@@ -1,4 +1,4 @@
-#include "objectcommon.c"
+#include "objectcommon.h"
 
 #ifndef OBJECT_PAIR_H
 #define OBJECT_PAIR_H

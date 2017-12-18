@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LIB_NUMBERTHEORY_H
+#define LIB_NUMBERTHEORY_H
 #include "libcommon.h"
 
 #ifdef GCC
@@ -31,3 +32,4 @@ number_t* degrad_conv_compose (const number_t* const val, const number_t* const 
   number_destruct(imd);
   return fin;
 }
+#endif

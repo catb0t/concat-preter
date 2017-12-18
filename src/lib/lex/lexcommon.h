@@ -1,5 +1,5 @@
-#include "../common.h"
-#include "../object/object.h"
+#include "../../common.h"
+#include "../object/objectcommon.h"
 
 #ifndef LEX_COMMON_H
 #define LEX_COMMON_H

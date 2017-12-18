@@ -1,4 +1,4 @@
-#include "objectcommon.c"
+#include "objectcommon.h"
 
 #ifndef OBJECT_SEQ_H
 #define OBJECT_SEQ_H

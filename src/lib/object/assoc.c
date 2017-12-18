@@ -1,4 +1,4 @@
-#include "objectcommon.c"
+#include "objectcommon.h"
 
 #ifndef OBJECT_ASSOC_H
 #define OBJECT_ASSOC_H

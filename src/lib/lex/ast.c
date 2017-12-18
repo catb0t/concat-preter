@@ -1,4 +1,4 @@
-#include "lexcommon.c"
+#include "lexcommon.h"
 
 astnode_t* ast_newtree (const char* const prog) {
   pfn();

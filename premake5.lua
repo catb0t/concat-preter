@@ -5,7 +5,9 @@ workspace "concat-preter"
   -- written in C (this only matters in VS)
   language "C"
 
-  flags { "fatalwarnings", "linktimeoptimization" }
+  toolset "gcc"
+
+  flags { "fatalwarnings" }
 
   filter "action:gmake*"
     buildoptions {
@@ -40,7 +42,7 @@ workspace "concat-preter"
 
     files { "src/%{wks.name}.*" }
 
-    links { "m", "fnv" }
+    links { "m", "fnv", "concat" }
 
     targetdir "bin/%{cfg.buildcfg}"
 
@@ -48,7 +50,7 @@ workspace "concat-preter"
   project "concat"
     kind "staticlib"
 
-    libfiles = {}
+    local libfiles = {}
 
     -- all the subdirectories of src/lib (unix only)
     for dir in io.popen("find src/lib/ -maxdepth 1 -type d | tail -1"):lines()
@@ -58,7 +60,7 @@ workspace "concat-preter"
     end
 
     -- src/lib/*/*common.c is what we care about
-    files(libfiles)
+    files { "src/lib/*/*.c" }
 
     -- libraries upon which this relies
     links { "m", "fnv" }
@@ -70,9 +72,26 @@ workspace "concat-preter"
   project "test"
     kind "consoleapp"
 
-    files { "src/test/test.c" }
+    local new_test_file = "#include<criterion/criterion.h>\n#include\"../headers.h\"\n"
 
-    links { "criterion", "fnv" }
+    for test_file in io.popen("find src/test/ -maxdepth 1 -type f -iregex '[^_]+.c'"):lines()
+    do
+      local new_lines = ""
+      for _, line in next, string.explode(io.readfile(test_file), "\n")
+      do
+        if not string.startswith(line, "#include")
+        then
+          new_lines = new_lines .. line .. "\n"
+        end
+      end
+      new_test_file = new_test_file .. new_lines .. "\n"
+    end
+
+    io.writefile(path.join(SOURCEDIR, "test", "_test.c"), new_test_file)
+
+    files { "src/test/_test.c" }
+
+    links { "criterion", "fnv", "m", "concat" }
 
     targetdir  "bin/%{cfg.buildcfg}/test"
     -- test_hello
@@ -89,7 +108,7 @@ workspace "concat-preter"
   project "clobber"
     kind "makefile"
 
-    -- on windows, clean like this
+    -- on not windows, clean like this
     filter "system:not windows"
       cleancommands {
         "({RMDIR} bin obj *.make Makefile *.o -r 2>/dev/null; echo)"

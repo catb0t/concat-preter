@@ -1,4 +1,4 @@
-#include "lexcommon.c"
+#include "lexcommon.h"
 
 astnode_t* lex_string (const char* const prog) {
   pfn();
