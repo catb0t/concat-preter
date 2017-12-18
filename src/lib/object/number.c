@@ -70,4 +70,29 @@ number_t* number_add (const number_t* const a, const number_t* const b) {
   return number_new(a->value + b->value);
 }
 
+number_t*   number_divmod (const number_t* const a, const number_t* const b, number_t** mod_out) {
+  (void) a;
+  (void) b;
+  (void) mod_out;
+  return NULL;
+}
+
+number_t*      number_mul (const number_t* const a, const number_t* const b) {
+  (void) a;
+  (void) b;
+  return NULL;
+}
+
+number_t*      number_sub (const number_t* const a, const number_t* const b) {
+  (void) a;
+  (void) b;
+  return NULL;
+}
+
+number_t*      number_pow (const number_t* const n, const number_t* const exp) {
+  (void) n;
+  (void) exp;
+  return NULL;
+}
+
 #endif

@@ -1,8 +1,9 @@
+#ifndef OBJECT_COMMON_H
+#define OBJECT_COMMON_H
+
 #include <stdarg.h>
 #include "../../common.h"
 
-#ifndef OBJECT_COMMON_H
-#define OBJECT_COMMON_H
 
 #ifdef GCC
 #line __LINE__ "objcommon"

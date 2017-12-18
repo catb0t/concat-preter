@@ -1,5 +1,2 @@
-#include "lib/compile/compilecommon.c"
-#include "lib/lex/lexcommon.c"
-#include "lib/lib/libcommon.c"
-#include "lib/object/objectcommon.c"
-#include "lib/stack/stackcommon.c"
+#include "lib/object/unify_object.c"
+#include "lib/stack/unify_stack.c"

@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef COMMON_H
+#define COMMON_H
 // iff funcdbg is given, then show stacktraces
 #ifdef FUNCDBG
   #define IFUNCDBG 1
@@ -734,3 +734,4 @@ char* make_empty_str (void) {
   snprintf(out, 1, "%s", "");
   return out;
 }
+#endif

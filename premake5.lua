@@ -1,3 +1,18 @@
+function os.subdirs(pth)
+  local m = os.matchstart(pth .. "/*")
+  local dirs = {}
+
+  while os.matchnext(m) do
+    if not os.matchisfile(m) then
+      table.insert(dirs, os.matchname(m))
+    end
+  end
+
+  os.matchdone(m)
+
+  return dirs
+end
+
 -- name of the entire codebase
 workspace "concat-preter"
   -- what ways this project can be built (dbg is the default because it is first)
@@ -9,7 +24,7 @@ workspace "concat-preter"
 
   flags { "fatalwarnings" }
 
-  filter "action:gmake*"
+  filter { "action:gmake*", "toolset:gcc" }
     buildoptions {
       "-Wall", "-Wextra", "-Wfloat-equal", "-Winline", "-Wundef", "-Werror",
       "-fverbose-asm", "-Wint-to-pointer-cast", "-Wshadow", "-Wpointer-arith",
@@ -36,37 +51,53 @@ workspace "concat-preter"
   -- lua variable
   SOURCEDIR = "src"
 
-  -- make an executable named prog
+  -- make an executable
   project "interp"
     kind "consoleapp"
 
     files { "src/%{wks.name}.*" }
 
-    links { "m", "fnv", "concat" }
+    links { "m", "fnv", "object", "stack" }
 
     targetdir "bin/%{cfg.buildcfg}"
 
-  -- make a lib named 'libhello.a'
+  project "object"
+    kind "staticlib"
+
+    files { "src/lib/object/unify_object.c" }
+
+    targetdir "bin/%{cfg.buildcfg}/lib"
+    targetextension ".o"
+
+  project "stack"
+    kind "staticlib"
+
+    files { "src/lib/stack/unify_stack.c" }
+
+    targetdir "bin/%{cfg.buildcfg}/lib"
+    targetextension ".o"
+
+  -- make a lib named 'libconcat.a'
   project "concat"
     kind "staticlib"
 
-    local libfiles = {}
+    --local libfiles = {}
 
-    -- all the subdirectories of src/lib (unix only)
-    for dir in io.popen("find src/lib/ -maxdepth 1 -type d | tail -1"):lines()
-    do
-      -- create src/lib/x/xcommon.c from x
-      table.insert(libfiles, path.join(dir, path.getbasename(dir) .. "common.c"))
-    end
+    ---- all the subdirectories of src/lib (unix only)
+    --for dir in os.subdir(path.join("src", "lib"))
+    --do
+    --  -- create src/lib/x/xcommon.c from x
+    --  table.insert(libfiles, path.join(dir, path.getbasename(dir) .. "common.c"))
+    --end
 
-    -- src/lib/*/*common.c is what we care about
-    files { "src/lib/*/*.c" }
+    -- files { "src/lib/*/*.c" }
 
     -- libraries upon which this relies
-    links { "m", "fnv" }
+    links { "m", "object", "stack", "fnv" }
 
     -- where these files will go
     targetdir "bin/%{cfg.buildcfg}/lib"
+    targetextension ".a"
 
   -- make the tests
   project "test"
@@ -74,7 +105,7 @@ workspace "concat-preter"
 
     local new_test_file = "#include<criterion/criterion.h>\n#include\"../headers.h\"\n"
 
-    for test_file in io.popen("find src/test/ -maxdepth 1 -type f -iregex '[^_]+.c'"):lines()
+    for test_file in io.popen("find ./src/test/ -type f -iregex '.*t_[a-z]*\\.c$'"):lines()
     do
       local new_lines = ""
       for _, line in next, string.explode(io.readfile(test_file), "\n")
@@ -91,7 +122,7 @@ workspace "concat-preter"
 
     files { "src/test/_test.c" }
 
-    links { "criterion", "fnv", "m", "concat" }
+    links { "criterion", "m", "stack", "fnv" }
 
     targetdir  "bin/%{cfg.buildcfg}/test"
     -- test_hello
