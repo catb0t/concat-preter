@@ -1,7 +1,7 @@
 #include <criterion/criterion.h>
 
 #undef DEBUG
-#include "../concat-preter.h"
+#include "../lib/stack/stackcommon.c"
 
 Test(stack, base10) {
   cr_assert_eq( is_base10("+0123.4567890"), true, "numeric string is base 10");
@@ -9,19 +9,19 @@ Test(stack, base10) {
 }
 
 Test(stack, atoi_strlen) {
-  cr_assert_eq( atoi_strlen(-200.003), 8, "signed fractional thou place");
-  cr_assert_eq( atoi_strlen(-200.3), 6, "signed 10s place dec");
-  cr_assert_eq( atoi_strlen(-200), 4, "signed int");
+  cr_assert_eq( atoi_strlen(NULL), 8, "signed fractional thou place");
+  cr_assert_eq( atoi_strlen(NULL), 6, "signed 10s place dec");
+  cr_assert_eq( atoi_strlen(NULL), 4, "signed int");
 }
 
 // add
 Test(stack, op_add) {
   stack_t* stk = stack_new();
-  stack_push(stk, 2);
-  stack_push(stk, 2);
+  stack_push(stk, number_new(2));
+  stack_push(stk, number_new(2));
 
   stack_op_add(stk);
-  cr_assert_eq( floorl(stack_top(stk) - 4), 0 , "addition" );
+  cr_assert_eq( floorl(stack_top(stk)->value - 4), 0 , "addition" );
 
   stack_destruct(stk);
 }
@@ -29,11 +29,11 @@ Test(stack, op_add) {
 // sub
 Test(stack, op_sub) {
   stack_t* stk = stack_new();
-  stack_push(stk, 2);
-  stack_push(stk, 1);
+  stack_push(stk, number_new(2));
+  stack_push(stk, number_new(1));
 
   stack_op_sub(stk);
-  cr_assert_eq( floorl(stack_top(stk)), 1 , "subtraction" );
+  cr_assert_eq( floorl(stack_top(stk)->value), 1 , "subtraction" );
 
   stack_destruct(stk);
 }
@@ -41,11 +41,11 @@ Test(stack, op_sub) {
 // mul
 Test(stack, op_mul) {
   stack_t* stk = stack_new();
-  stack_push(stk, 2);
-  stack_push(stk, 7);
+  stack_push(stk, number_new(2));
+  stack_push(stk, number_new(7));
 
   stack_op_mul(stk);
-  cr_assert_eq( floorl(stack_top(stk)), 14 , "multiplication" );
+  cr_assert_eq( floorl(stack_top(stk)->value), 14 , "multiplication" );
 
   stack_destruct(stk);
 }
@@ -53,8 +53,8 @@ Test(stack, op_mul) {
 // div
 Test(stack, op_divmod) {
   stack_t* stk = stack_new();
-  stack_push(stk, 4);
-  stack_push(stk, 2);
+  stack_push(stk, number_new(4));
+  stack_push(stk, number_new(2));
 
   stack_op_divmod(stk);
   cr_assert_str_eq( stack_see(stk), "2 0 " , "division & mod" );
@@ -63,8 +63,8 @@ Test(stack, op_divmod) {
 }
 Test(stack, op_div_frac) {
   stack_t* stk = stack_new();
-  stack_push(stk, 7);
-  stack_push(stk, 2);
+  stack_push(stk, number_new(7));
+  stack_push(stk, number_new(2));
 
   stack_op_divmod(stk);
   cr_assert_str_eq( stack_see(stk), "3.5 1 ", "fractional division" );
@@ -75,8 +75,8 @@ Test(stack, op_div_frac) {
 // swap
 Test(stack, op_swp) {
   stack_t* stk = stack_new();
-  stack_push(stk, 7);
-  stack_push(stk, 2);
+  stack_push(stk, number_new(7));
+  stack_push(stk, number_new(2));
 
   stack_op_swp(stk);
   cr_assert_str_eq( stack_see(stk), "7 2 ", "swap top two items" );

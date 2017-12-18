@@ -2,7 +2,7 @@
 #line 2 "calcmain"
 #endif
 
-#include "main.h"
+#include "concat-preter.h"
 //#include "lex.h"
 
 int main (int len_args, const char* const* const args) {

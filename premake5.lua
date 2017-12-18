@@ -19,11 +19,23 @@ workspace "concat-preter"
       "-Wold-style-definition", "-Wstrict-prototypes", "-Wpointer-sign"
     }
 
+  filter "configurations:dbg"
+    optimize "Off"
+    symbols "On"
+    buildoptions { "-ggdb3", "-O0" }
+
+  filter "configurations:dist"
+    optimize "Full"
+    symbols "Off"
+    buildoptions { "-O3" }
+
+  filter {}
+
   -- lua variable
   SOURCEDIR = "src"
 
   -- make an executable named prog
-  project "interpreter"
+  project "interp"
     kind "consoleapp"
 
     files { "src/%{wks.name}.*" }
@@ -58,7 +70,7 @@ workspace "concat-preter"
   project "test"
     kind "consoleapp"
 
-    files { "src/test/*.c" }
+    files { "src/test/test.c" }
 
     links { "criterion", "fnv" }
 
