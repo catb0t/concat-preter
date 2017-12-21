@@ -142,11 +142,11 @@ pair_t** assoc_get_ref (const assoc_t* const a, const size_t idx, bool* ok) {
 
   object_failnull(a);
 
-  if (ok) { *ok = true; }
+  if (NULL != ok) { *ok = true; }
 
   if (assoc_isempty(a) || un2signed(idx) > a->idx) {
 
-    if (ok) { *ok = false; }
+    if (NULL != ok) { *ok = false; }
 
     object_error(
       ER_INDEXERROR,

@@ -1,2 +1,5 @@
+#include "lib/compile/unify_compile.c"
+#include "lib/lex/unify_lex.c"
+#include "lib/lib/unify_lib.c"
 #include "lib/object/unify_object.c"
 #include "lib/stack/unify_stack.c"
