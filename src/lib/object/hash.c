@@ -84,6 +84,7 @@ hash_t*   hash_copy (const hash_t* const h) {
   return copy;
 }
 
+pure const_func
 bool   hash_isempty (const hash_t* const h) {
   pfn();
 

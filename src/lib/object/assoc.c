@@ -127,7 +127,7 @@ void assoc_unzip (const assoc_t* a, array_t** car, array_t** cdr) {
 }
 
 size_t assoc_length (const assoc_t* const a) {
-  return signed2un(a->idx + 1);
+  return (size_t) ( a->idx + 1 );
 }
 
 define_isinbounds(assoc);

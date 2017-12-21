@@ -205,7 +205,7 @@ void*   _safecalloc (const size_t nmemb, const size_t len, uint64_t lineno, cons
 
 pure const_func
 size_t signed2un (const ssize_t val) {
-  return val < 0 ? 0 : (size_t) val;
+  return (size_t) (val < 0 ? 0 : (size_t) val) ;
 }
 
 pure const_func

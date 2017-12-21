@@ -1,10 +1,11 @@
-function os.subdirs(pth)
+function os.scandir(pth, dironly)
   local m = os.matchstart(pth .. "/*")
   local dirs = {}
 
   while os.matchnext(m) do
-    if not os.matchisfile(m) then
-      table.insert(dirs, os.matchname(m))
+    this = os.matchname(m)
+    if not dironly or (dironly and not os.matchisfile(m)) then
+      table.insert(dirs, this)
     end
   end
 
@@ -22,7 +23,7 @@ workspace "concat-preter"
 
   toolset "gcc"
 
-  flags { "fatalwarnings" }
+  flags { "fatalwarnings", "linktimeoptimization" }
 
   filter { "action:gmake*", "toolset:gcc" }
     buildoptions {
@@ -31,7 +32,7 @@ workspace "concat-preter"
       "-Wcast-align", "-Wcast-qual", "-Wunreachable-code", "-Wstrict-overflow=5",
       "-Wwrite-strings", "-Wconversion", "--pedantic-errors",
       "-Wredundant-decls", "-Werror=maybe-uninitialized",
-      "-Wbad-function-cast", "-Wmissing-declarations", "-Wmissing-parameter-type",
+      "-Wmissing-declarations", "-Wmissing-parameter-type",
       "-Wmissing-prototypes", "-Wnested-externs", "-Wold-style-declaration",
       "-Wold-style-definition", "-Wstrict-prototypes", "-Wpointer-sign"
     }

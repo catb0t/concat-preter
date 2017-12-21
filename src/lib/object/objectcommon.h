@@ -45,7 +45,7 @@ typedef struct st_obj_t   object_t;
 so f == f but 0 != f */
 typedef struct st_F_t     F_t;
 /* true singleton compares true with everything except false
-so t == t and 1 == t but t != f */
+so t == t but t != f */
 typedef struct st_T_t     T_t;
 
 // arithmetic types
@@ -92,8 +92,8 @@ struct st_T_t {
 };
 
 struct st_fnc_t {
-  char*  code;
-  char*  name;
+  char *code,
+       *name;
 
   OBJ_UID_SLOT;
 };
@@ -158,8 +158,8 @@ struct st_fxwd_t {
   and a pointer to the next node, or NULL / an object of objtype_t t_F for the end of the list.
 */
 struct st_pair_t {
-  object_t* car;
-  object_t* cdr;
+  object_t *car,
+           *cdr;
 
   OBJ_UID_SLOT;
 };
@@ -223,8 +223,8 @@ struct st_assoc_t {
 */
 struct st_hash_t {
   array_t* keys;
-  assoc_t* vals;
-  assoc_t* idxs;
+  assoc_t* vals,
+         * idxs;
 
   OBJ_UID_SLOT;
 };
