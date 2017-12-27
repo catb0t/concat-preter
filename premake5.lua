@@ -1,19 +1,3 @@
-function os.scandir(pth, dironly)
-  local m = os.matchstart(pth .. "/*")
-  local dirs = {}
-
-  while os.matchnext(m) do
-    this = os.matchname(m)
-    if not dironly or (dironly and not os.matchisfile(m)) then
-      table.insert(dirs, this)
-    end
-  end
-
-  os.matchdone(m)
-
-  return dirs
-end
-
 -- name of the entire codebase
 workspace "concat-preter"
   -- what ways this project can be built (dbg is the default because it is first)
@@ -27,7 +11,7 @@ workspace "concat-preter"
 
   filter { "action:gmake*", "toolset:gcc" }
     buildoptions {
-      "-Wall", "-Wextra", "-Wfloat-equal", "-Winline", "-Wundef", "-Werror",
+      "-Wall", "-std=c11", "-Wextra", "-Wfloat-equal", "-Winline", "-Wundef", "-Werror",
       "-fverbose-asm", "-Wint-to-pointer-cast", "-Wshadow", "-Wpointer-arith",
       "-Wcast-align", "-Wcast-qual", "-Wunreachable-code", "-Wstrict-overflow=5",
       "-Wwrite-strings", "-Wconversion", "--pedantic-errors",
@@ -106,7 +90,7 @@ workspace "concat-preter"
 
     local new_test_file = "#include<criterion/criterion.h>\n#include\"../headers.h\"\n"
 
-    for test_file in io.popen("find ./src/test/ -type f -iregex '.*t_[a-z]*\\.c$'"):lines()
+    for _, test_file in next, os.matchfiles(path.join(SOURCEDIR, "test", "t_*.c"))
     do
       local new_lines = ""
       for _, line in next, string.explode(io.readfile(test_file), "\n")
@@ -132,10 +116,19 @@ workspace "concat-preter"
   project "fnv"
     kind "staticlib"
     files { "deps/fnv-hash/hash_*.c" }
-
     links { "m" }
 
     targetdir "bin/%{cfg.buildcfg}/lib"
+
+  project "yacbnl"
+    kind "staticlib"
+    files { path.join("deps", "yacbnl", "yacbnl.min.c") }
+    links { "m" }
+
+  project "sparse"
+    kind "staticlib"
+    files { path.join("deps", "sparse", "*.c") }
+    links { "yacbnl" }
 
   project "clobber"
     kind "makefile"
