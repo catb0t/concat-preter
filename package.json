@@ -8,9 +8,9 @@
     "language"
   ],
   "dependencies": {
+    "catb0t/sparse": "*",
     "catb0t/fnv-hash": "*",
     "catb0t/yacbnl": "*",
-    "willemt/file2str": "*"
   },
   "license": "GPL v3",
   "src": [

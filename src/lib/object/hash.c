@@ -9,6 +9,7 @@
 
 #include "../../../deps/fnv-hash/fnv.h"
 
+// 32 bits is enough
 typedef Fnv32_t hashkey_t;
 
 hashkey_t hash_obj (const object_t* const obj);

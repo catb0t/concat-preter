@@ -9,8 +9,8 @@
   ],
   "license": "GPL v3",
   "src": [
-    "yacbnl.min.h",
-    "Makefile",
+    "min/yacbnl.min.c",
+    "min/yacbnl.min.h",
     "README.md",
     "LICENSE"
   ]

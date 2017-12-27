@@ -1,0 +1,25 @@
+{
+  "name": "sparse",
+  "version": "0.0.2",
+  "repo": "catb0t/sparse",
+  "description": "Sparse arrays implemented by run-length-encoding regions of zeroes",
+  "keywords": [
+    "math",
+    "arrays",
+    "bignum"
+  ],
+  "dependencies": {
+    "catb0t/yacbnl": "*"
+  },
+  "license": "GPL v3",
+  "src": [
+    "src/sparse.h",
+    "src/primitive/nonsparse.c",
+    "src/primitive/sparse.c",
+    "src/yacbnl/nonsparse.c",
+    "src/yacbnl/sparse.c",
+    "src/unify_sparse.c",
+    "README.md",
+    "LICENSE"
+  ]
+}

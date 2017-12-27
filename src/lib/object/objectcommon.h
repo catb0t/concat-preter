@@ -176,6 +176,8 @@ struct st_assoc_t {
 };
 
 /*
+
+
   a hashtable consists of:
     non-sparse list of keys: array_t
     non-sparse assoc: pairs of values and hashes
@@ -223,8 +225,7 @@ struct st_assoc_t {
 */
 struct st_hash_t {
   array_t* keys;
-  assoc_t* vals,
-         * idxs;
+  assoc_t* vals;
 
   OBJ_UID_SLOT;
 };
@@ -420,21 +421,25 @@ void assoc_destruct_args (const size_t argc, ...);
 void         assoc_clear (assoc_t* const a);
 void assoc_resizev3 (assoc_t* const a, const size_t new_len);
 
+// provided by rlearray.h
+typedef uint64_t rle_atom_t;
+rle_atom_t* rle_array_new (const uint64_t* const non_sparse, const uint64_t len);
+
 // provided by number.h
-number_t*      number_new (const long double val);
-number_t*     number_copy (const number_t* const n);
-number_t*      number_mul (const number_t* const a, const number_t* const b);
-number_t*      number_add (const number_t* const a, const number_t* const b);
-number_t*      number_sub (const number_t* const a, const number_t* const b);
-number_t*   number_divmod (const number_t* const a, const number_t* const b, number_t** mod_out);
-number_t*      number_pow (const number_t* const n, const number_t* const exp);
-number_t*     number_pmul (const numderlying_t a, const number_t* const b);
-number_t*     number_padd (const numderlying_t a, const number_t* const b);
-number_t*     number_psub (const numderlying_t a, const number_t* const b);
-number_t*  number_pdivmod (const numderlying_t a, const number_t* const b, number_t** mod_out);
-number_t*     number_ppow (const numderlying_t n, const number_t* const exp);
-number_t*     number_powp (const number_t* const n, const numderlying_t* const exp);
-number_t*      number_abs (const number_t* const n);
+number_t*     number_new (const long double val);
+number_t*    number_copy (const number_t* const n);
+number_t*     number_mul (const number_t* const a, const number_t* const b);
+number_t*     number_add (const number_t* const a, const number_t* const b);
+number_t*     number_sub (const number_t* const a, const number_t* const b);
+number_t*  number_divmod (const number_t* const a, const number_t* const b, number_t** mod_out);
+number_t*     number_pow (const number_t* const n, const number_t* const exp);
+number_t*    number_pmul (const numderlying_t a, const number_t* const b);
+number_t*    number_padd (const numderlying_t a, const number_t* const b);
+number_t*    number_psub (const numderlying_t a, const number_t* const b);
+number_t* number_pdivmod (const numderlying_t a, const number_t* const b, number_t** mod_out);
+number_t*    number_ppow (const numderlying_t n, const number_t* const exp);
+number_t*    number_powp (const number_t* const n, const numderlying_t* const exp);
+number_t*     number_abs (const number_t* const n);
 char*          number_see (const number_t* const n);
 bool            number_eq (const number_t* const a, const number_t* const b);
 bool            number_gt (const number_t* const a, const number_t* const b);

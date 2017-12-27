@@ -45,7 +45,7 @@ workspace "concat-preter"
   filter "configurations:dist"
     optimize "Full"
     symbols "Off"
-    buildoptions { "-O3" }
+    buildoptions { "-O3", "-fomit-frame-pointer" }
 
   filter {}
 
